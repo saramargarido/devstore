@@ -1,6 +1,3 @@
-
 export default function SearchLoading() {
-  return (
-    <div>carregando search</div>
-  )
+  return <div>carregando search</div>
 }
