@@ -8,7 +8,7 @@ interface ProductProps {
   }
 }
 
-async function getProducts(slug: string): Promise<Product> {
+async function getProduct(slug: string): Promise<Product> {
   const response = await api(`/products/${slug}`, {
     next: {
       revalidate: 60 * 60, // a cada 1h vai fazer a requisição uma única vez
@@ -20,8 +20,15 @@ async function getProducts(slug: string): Promise<Product> {
   return products
 }
 
+export async function generateMetadata({ params }: ProductProps) {
+  const product = await getProduct(params.slug);
+  return {
+    title: `${product.title} | devstore`,
+  };
+}
+
 export default async function ProductPage({params}: ProductProps) {
-  const product = await getProducts(params.slug)
+  const product = await getProduct(params.slug)
   return (
     <div className="relative grid max-h-[860px] grid-cols-3">
       <div className="col-span-2 overflow-hidden">
