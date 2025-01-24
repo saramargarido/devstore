@@ -1,21 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ES2017", // OK, mas ES2020 pode ser mais moderno
-    "lib": ["dom", "dom.iterable", "esnext"], // Mantido, simplificando sem dom.iterable
-    "allowJs": true,
+    "target": "es5", 
+    "lib": ["dom", "dom.iterable", "esnext"], 
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node", // Ajustado para "node"
+    "moduleResolution": "node", 
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".", // Adicionado explicitamente
+    "baseUrl": ".", 
     "paths": {
-      "@/*": ["src/*"] // Já está correto
+      "@/*": ["src/*"] 
     },
     "plugins": [
       {
