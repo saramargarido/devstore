@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017", // OK, mas ES2020 pode ser mais moderno
-    "lib": ["dom", "esnext"], // Mantido, simplificando sem dom.iterable
+    "lib": ["dom", "dom.iterable", "esnext"], // Mantido, simplificando sem dom.iterable
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
