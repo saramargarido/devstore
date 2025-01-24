@@ -1,10 +1,10 @@
 import { z } from 'zod'
 import data from '../data.json'
 
-export async function GET(
-  _: Request,
-  { params }: { params: { slug: string } },
-) {
+type Params = Promise<{ slug: string }>
+
+export async function GET(_: Request, props: { params: Params }) {
+  const params = await props.params
   await new Promise((resolve) => setTimeout(resolve, 1000))
   const slug = z.string().parse(params.slug)
 

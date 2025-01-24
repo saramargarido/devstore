@@ -2,11 +2,7 @@ import { api } from '@/data/api'
 import { Product } from '@/data/types/product'
 import Image from 'next/image'
 
-interface ProductProps {
-  params: {
-    slug: string
-  }
-}
+type Params = Promise<{ slug: string }>
 
 async function getProduct(slug: string): Promise<Product> {
   const response = await api(`/products/${slug}`, {
@@ -20,14 +16,25 @@ async function getProduct(slug: string): Promise<Product> {
   return products
 }
 
-export async function generateMetadata({ params }: ProductProps) {
-  const product = await getProduct(params.slug);
+export async function generateMetadata(props: { params: Params }) {
+  const params = await props.params
+  const product = await getProduct(params.slug)
   return {
     title: `${product.title} | devstore`,
-  };
+  }
 }
 
-export default async function ProductPage({params}: ProductProps) {
+export async function generateStaticParams() {
+  const response = await api('/products/featured')
+  const products = await response.json()
+
+  return products.map((product: Product) => {
+    return { slug: product.slug }
+  })
+}
+export default async function ProductPage(props: { params: Params }) {
+  const params = await props.params
+
   const product = await getProduct(params.slug)
   return (
     <div className="relative grid max-h-[860px] grid-cols-3">
@@ -48,18 +55,18 @@ export default async function ProductPage({params}: ProductProps) {
 
         <div className="mt-8 flex items-center gap-3">
           <span className="inline-block rounded-full bg-violet-500 px-5 py-2.5 font-semibold">
-            {product.price.toLocaleString("pr-BR", {
-              style: "currency",
-              currency: "BRL",
+            {product.price.toLocaleString('pr-BR', {
+              style: 'currency',
+              currency: 'BRL',
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             })}
           </span>
           <span className="text-sm text-zinc-400">
-            Em 12x s/ juros de{" "}
-            {(product.price / 12).toLocaleString("pr-BR", {
-              style: "currency",
-              currency: "BRL",
+            Em 12x s/ juros de{' '}
+            {(product.price / 12).toLocaleString('pr-BR', {
+              style: 'currency',
+              currency: 'BRL',
             })}
           </span>
         </div>
@@ -103,5 +110,5 @@ export default async function ProductPage({params}: ProductProps) {
         </button>
       </div>
     </div>
-  );
+  )
 }
