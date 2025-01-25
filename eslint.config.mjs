@@ -18,7 +18,8 @@ const eslintConfig = [
   ),
   {
     rules: {
-      '@typescript-eslint/no-unsafe-declaration-merging': 'error',
+      '@typescript-eslint/no-unsafe-declaration-merging': 'off',
+      '@typescript-eslint/no-namespace': 'off',
     },
   },
 ]
