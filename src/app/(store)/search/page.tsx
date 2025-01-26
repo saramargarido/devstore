@@ -10,7 +10,6 @@ interface SearchProps {
   }
 }
 
-
 async function searchProducts(query: string): Promise<Product[]> {
   const response = await api(`/products/search?q=${query}`, {
     next: {
@@ -23,10 +22,12 @@ async function searchProducts(query: string): Promise<Product[]> {
   return products
 }
 
-export default async function Search({searchParams}: SearchProps) {
-  const {q: query} = searchParams
+export default async function Search({ searchParams }: SearchProps) {
+  const { q: query } = searchParams
 
-  if(!query) { redirect('/') }
+  if (!query) {
+    redirect('/')
+  }
 
   const products = await searchProducts(query)
 
@@ -64,7 +65,6 @@ export default async function Search({searchParams}: SearchProps) {
             </div>
           </Link>
         ))}
-
       </div>
     </div>
   )
