@@ -1,22 +1,24 @@
 'use client'
-import { useCart } from "@/context/cart-context";
+import { useCart } from '@/context/cart-context'
 
 export interface AddToCartButtonProps {
-  productId: number;
+  productId: number
 }
 
-export function AddToCartButton ({ productId }: AddToCartButtonProps) {
-  const { addToCart } = useCart();
+export function AddToCartButton({ productId }: AddToCartButtonProps) {
+  const { addToCart } = useCart()
 
-  function handleAddProductToCart() { addToCart(productId); }
+  function handleAddProductToCart() {
+    addToCart(productId)
+  }
 
   return (
-        <button
-        onClick={handleAddProductToCart}
-          type="button"
-          className="mt-8 flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white"
-        >
-          Adicionar ao carrinho
-        </button>
-  );
+    <button
+      onClick={handleAddProductToCart}
+      type="button"
+      className="mt-8 flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white"
+    >
+      Adicionar ao carrinho
+    </button>
+  )
 }
